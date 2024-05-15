@@ -1,0 +1,78 @@
+# This file contains the energy requirements for different building types and sizes
+# as defined by the BBR regulations. The requirements are defined in terms of PET
+# (Energy Performance of the Building) in kWh/m2. The requirements are defined for
+# different versions of the BBR regulations. The current version is defined in the
+# 'current_bbr' field. The requirements are defined in the following format:
+#   - category: The category of the building type and size
+#   - max_area: The maximum area of the building in m2
+#   - min_area: The minimum area of the building in m2
+#   - pet_requirement: The PET requirement in kWh/m2
+
+# The 'pet_requirement' field is required for all categories. If it is set to null,
+# it means that there is no specific requirement for that field.
+# The 'min_area' and 'max_area' field are required in case there are two or more
+# categories for the same building type.
+
+current_bbr: BBR29 # The current BBR version
+
+energy_class_thresholds: # Class upper boundaries defined in %
+  A: 50
+  B: 75
+  C: 100
+  D: 135
+  E: 180
+  F: 235
+  G: float('inf') # Represents no upper bound
+
+energy_requirements:
+  BBR29:
+    Småhus:
+      - category: "Småhus > 130 m2"
+        max_area: null
+        min_area: 130
+        pet_requirement: 90
+      - category: "Småhus 90-130 m2"
+        max_area: 130
+        min_area: 95
+        pet_requirement: 90
+      - category: "Småhus 50-90 m2"
+        max_area: 90
+        min_area: 50
+        pet_requirement: 100
+      - category: "Småhus ≤ 50 m2"
+        max_area: 50
+        min_area: null
+        pet_requirement: null # No specific requirement
+    Lokal:
+      - category: "Lokal > 50 m2"
+        max_area: null
+        min_area: 50
+        pet_requirement: 70
+      - category: "Lokal ≤ 50 m2"
+        max_area: 50
+        min_area: null
+        pet_requirement: null # No specific requirement
+    Flerbostadshus:
+      pet_requirement: 75
+
+  BBR25:
+    Småhus:
+      - category: "Småhus > 50 m2"
+        max_area: null
+        min_area: 50
+        pet_requirement: 90
+      - category: "Småhus ≤ 50 m2"
+        max_area: 50
+        min_area: null
+        pet_requirement: null # No specific requirement
+    Lokal:
+      - category: "Lokal > 50 m2"
+        max_area: null
+        min_area: 50
+        pet_requirement: 80
+      - category: "Lokal ≤ 50 m2"
+        max_area: 50
+        min_area: null
+        pet_requirement: null # No specific requirement
+    Flerbostadshus:
+      pet_requirement: 85
